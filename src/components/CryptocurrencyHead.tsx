@@ -54,8 +54,8 @@ function CryptocurrencyHead({ sortRows }: { sortRows: (property: string, order: 
                         }}
                     />
                 </TableCell>
-                {Object.keys(headCells).map((headCell) => (
-                    <TableCell style={{ fontWeight: 'bold' }}>
+                {Object.keys(headCells).map((headCell, index) => (
+                    <TableCell style={{ fontWeight: 'bold' }} key={index}>
                         <TableSortLabel
                             active
                             direction={headCells[headCell]['order']}

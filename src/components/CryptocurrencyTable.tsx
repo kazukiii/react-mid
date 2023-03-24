@@ -29,7 +29,7 @@ function CryptocurrencyTable({ rows, isLoading, isError, setData }: any) {
                 <CryptocurrencyHead sortRows={sortRows} />
                 <TableBody>
                     {rows.map((row: any) => (
-                            <CryptocurrencyTableRow row={row} />
+                        <CryptocurrencyTableRow row={row} key={row.id}/>
                     ))}
                 </TableBody>
             </Table>
