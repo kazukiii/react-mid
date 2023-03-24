@@ -1,8 +1,8 @@
 import CryptocurrencyTable from "./components/CryptocurrencyTable"
-import {Box, Slider, TextField } from "@mui/material"
-import { useState } from "react"
+import { Box, Slider, TextField } from "@mui/material"
+import { SyntheticEvent, useRef, useState } from "react"
 import Header from "./components/Header"
-import { debounce, filter } from "lodash"
+import { filter } from "lodash"
 import { useFetch } from "./hooks/useFetch"
 import Button from "@mui/material/Button"
 import axios from "axios"
@@ -25,7 +25,7 @@ function App() {
             setData(filter(data, (row) => value[0] <= row['current_price'] && row['current_price'] <= value[1]))
         }
     }
-    const handleChange = async (event: Event, newValue: number | number[]) => {
+    const handleChange = async (event: SyntheticEvent | Event, newValue: number | number[]) => {
         setValue(newValue as number[])
         await search(nameForSearch, value)
     }
@@ -56,6 +56,14 @@ function App() {
                         style={{ width: 250, height: 30, marginBottom: 30 }}
                         autoComplete="off"
                         onChange={handleInputChange}
+                        onKeyDown={async (e) => {
+                            console.log(e.key, '1111')
+                            if (e.key === 'Enter') {
+                                e.preventDefault()
+                                handleInputChange(e)
+                                await handleClick(nameForSearch)
+                            }
+                        }}
                     />
                     <Button onClick={() => handleClick(nameForSearch)}>Search</Button>
                 </div>
@@ -65,7 +73,8 @@ function App() {
                         <Slider
                             getAriaLabel={() => 'Temperature range'}
                             value={value}
-                            onChange={debounce(handleChange, 100)}
+                            onChange={handleChange}
+                            onChangeCommitted={handleChange}
                             valueLabelDisplay="auto"
                             max={30000}
                         />
