@@ -10,8 +10,8 @@ export interface Cryptocurrency {
   id: string
   name: string
   symbol: string
-  price: number
-  marketCap: number
+  current_price: number
+  market_cap: number
   image: string
   last_updated: string
 }
