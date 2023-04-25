@@ -18,8 +18,8 @@ const CryptocurrencyTableRow: FC<CryptocurrencyTableRowProps> = ({ row }) => {
         {row.name}
       </TableCell>
       <TableCell>{row.symbol}</TableCell>
-      <TableCell sx={{ whiteSpace: 'nowrap' }}>$ {row.marketCap}</TableCell>
-      <TableCell sx={{ whiteSpace: 'nowrap' }}>$ {row.price}</TableCell>
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>$ {row.market_cap}</TableCell>
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>$ {row.current_price}</TableCell>
       <TableCell>{format(new Date(row.last_updated), 'yyyy-MM-dd HH:mm:ss')}</TableCell>
     </TableRow>
   )
