@@ -2,11 +2,11 @@ import React, { FC, useState } from 'react'
 import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material'
 import { Order, HeadCell } from '../../types/cryptocurrency'
 
-interface CryptocurrencyHeadProps {
+interface CryptocurrencyTableHeadProps {
   sortRows: (property: string, order: Order) => void
 }
 
-const CryptocurrencyHead: FC<CryptocurrencyHeadProps> = ({ sortRows }) => {
+const CryptocurrencyTableHead: FC<CryptocurrencyTableHeadProps> = ({ sortRows }) => {
   const [nameOrder, setNameOrder] = useState<Order>('asc')
   const [symbolOrder, setSymbolOrder] = useState<Order>('asc')
   const [marketCapOrder, setMarketCapOrder] = useState<Order>('asc')
@@ -73,4 +73,4 @@ const CryptocurrencyHead: FC<CryptocurrencyHeadProps> = ({ sortRows }) => {
   )
 }
 
-export default CryptocurrencyHead
+export default CryptocurrencyTableHead

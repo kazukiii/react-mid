@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { orderBy } from 'lodash'
 import { CircularProgress, Table, TableBody, TableContainer } from '@mui/material'
 import CryptocurrencyTableRow from './CryptocurrencyTableRow'
-import CryptocurrencyHead from './CryptocurrencyHead'
+import CryptocurrencyTableHead from './CryptocurrencyTableHead'
 import { Order, Cryptocurrency } from '../../types/cryptocurrency'
 
 interface CryptocurrencyTableProps {
@@ -32,7 +32,7 @@ const CryptocurrencyTable: FC<CryptocurrencyTableProps> = ({ rows, isLoading, is
   return (
     <TableContainer>
       <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
-        <CryptocurrencyHead sortRows={sortRows} />
+        <CryptocurrencyTableHead sortRows={sortRows} />
         <TableBody>
           {rows.map((row) => (
             <CryptocurrencyTableRow row={row} key={row.id} />
