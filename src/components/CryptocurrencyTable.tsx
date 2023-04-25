@@ -1,40 +1,46 @@
-import {CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material"
-import CryptocurrencyTableRow from "./CryptocurrencyTableRow"
-import CryptocurrencyHead from "./CryptocurrencyHead"
+import React, { FC } from 'react'
 import { orderBy } from 'lodash'
+import { CircularProgress, Table, TableBody, TableContainer } from '@mui/material'
+import CryptocurrencyTableRow from './CryptocurrencyTableRow'
+import CryptocurrencyHead from './CryptocurrencyHead'
+import { Order, Cryptocurrency } from '../../types/cryptocurrency'
 
-function CryptocurrencyTable({ rows, isLoading, isError, setData }: any) {
-    const sortRows = (property: string, order: 'asc' | 'desc') => {
-        setData(orderBy(rows, property, order === 'asc' ? 'desc': 'asc'))
-    }
+interface CryptocurrencyTableProps {
+  rows: Cryptocurrency[]
+  isLoading: boolean
+  isError: boolean
+  setData: (data: Cryptocurrency[]) => void
+}
 
-    if (isLoading) {
-        return (
-            <div style={{ display: 'flex', justifyContent: 'center'}}>
-                <CircularProgress />
-            </div>
-        )
-    }
+const CryptocurrencyTable: FC<CryptocurrencyTableProps> = ({ rows, isLoading, isError, setData }) => {
+  const sortRows = (property: string, order: Order) => {
+    setData(orderBy(rows, property, order === 'asc' ? 'desc' : 'asc'))
+  }
 
-    if (isError) {
-        return <p>Error!</p>
-    }
-
+  if (isLoading) {
     return (
-        <TableContainer>
-            <Table
-                sx={{ minWidth: 750 }}
-                aria-labelledby="tableTitle"
-            >
-                <CryptocurrencyHead sortRows={sortRows} />
-                <TableBody>
-                    {rows.map((row: any) => (
-                        <CryptocurrencyTableRow row={row} key={row.id}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+      <div className="flex justify-center">
+        <CircularProgress />
+      </div>
     )
+  }
+
+  if (isError) {
+    return <p>Error! Please run it again after some time.</p>
+  }
+
+  return (
+    <TableContainer>
+      <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+        <CryptocurrencyHead sortRows={sortRows} />
+        <TableBody>
+          {rows.map((row) => (
+            <CryptocurrencyTableRow row={row} key={row.id} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
 }
 
 export default CryptocurrencyTable
